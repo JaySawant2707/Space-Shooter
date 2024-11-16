@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.XR;
 using UnityEngine;
 
 public class Shooter : MonoBehaviour
@@ -17,6 +16,12 @@ public class Shooter : MonoBehaviour
 
     [HideInInspector]public bool isFiring;
     Coroutine firingCorotine;
+    AudioManager audioManager;
+
+    void Awake()
+    {
+        audioManager = FindFirstObjectByType<AudioManager>();
+    }
 
     void Start()
     {
@@ -49,6 +54,8 @@ public class Shooter : MonoBehaviour
         while (true)
         {
             GameObject instance = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+            audioManager.PlayShootingVolume();
 
             Rigidbody2D rb = instance.GetComponent<Rigidbody2D>();
 

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements.Experimental;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,11 +12,15 @@ public class PlayerController : MonoBehaviour
     Vector2 rawInput;
     Vector2 minBound;
     Vector2 maxBound;
+    //Vector3 touchPos;
+
+    Rigidbody2D rb;
     Shooter shooter;
 
     void Awake()
     {
         shooter = GetComponent<Shooter>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -45,6 +48,20 @@ public class PlayerController : MonoBehaviour
         newPos.y = Mathf.Clamp(transform.position.y + delta.y, minBound.y + paddingBottom, maxBound.y - paddingTop);
 
         transform.position = newPos;
+
+        // if(Input.touchCount > 0)
+        // {
+        //     Touch touch = Input.GetTouch(0);
+        //     touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+        //     touchPos.z = 0;
+        //     Vector3 dir = touchPos - transform.position;
+        //     rb.linearVelocity = new Vector2(dir.x, dir.y) * moveSpeed * Time.deltaTime;
+
+        //     if (touch.phase == UnityEngine.TouchPhase.Ended)
+        //     {
+        //         rb.linearVelocity = Vector2.zero;
+        //     }
+        // }
     }
 
     void OnMove(InputValue value)

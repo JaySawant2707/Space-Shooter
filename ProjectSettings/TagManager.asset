@@ -41,5 +41,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 4237248263
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2269127871
+    locked: 0
+  - name: Enemy
+    uniqueID: 2559066809
+    locked: 0
+  - name: Interactables
+    uniqueID: 1643212899
+    locked: 0
+  - name: Player
+    uniqueID: 2401079529
+    locked: 0
+  - name: VFX
+    uniqueID: 1424057233
+    locked: 0
   m_RenderingLayers:
   - Default
