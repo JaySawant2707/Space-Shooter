@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float paddingRight;
     [SerializeField] float paddingTop;
     [SerializeField] float paddingBottom;
+    [SerializeField] float touchOffset;
     Vector2 rawInput;
     Vector2 minBound;
     Vector2 maxBound;
-    //Vector3 touchPos;
 
     Rigidbody2D rb;
     Shooter shooter;
@@ -49,19 +49,20 @@ public class PlayerController : MonoBehaviour
 
         transform.position = newPos;
 
-        // if(Input.touchCount > 0)
-        // {
-        //     Touch touch = Input.GetTouch(0);
-        //     touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-        //     touchPos.z = 0;
-        //     Vector3 dir = touchPos - transform.position;
-        //     rb.linearVelocity = new Vector2(dir.x, dir.y) * moveSpeed * Time.deltaTime;
+        if(Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position) + Vector3.up * touchOffset;
+            touchPos.z = 0;
+            //transform.position = touchPos;
+            Vector3 dir = touchPos - transform.position;
+            rb.linearVelocity = new Vector2(dir.x, dir.y) * moveSpeed * Time.deltaTime;
 
-        //     if (touch.phase == UnityEngine.TouchPhase.Ended)
-        //     {
-        //         rb.linearVelocity = Vector2.zero;
-        //     }
-        // }
+            if (touch.phase == UnityEngine.TouchPhase.Ended)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+        }
     }
 
     void OnMove(InputValue value)
